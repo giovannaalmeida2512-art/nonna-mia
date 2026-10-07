@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nonna Mia | Restaurante Italiano</title>
+<style>
+:root{
+  --wine:#7d0000;
+  --wine-dark:#560000;
+  --cream:#fffaf3;
+  --gold:#c99a4a;
+  --text:#3b2925;
+  --muted:#76655f;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;background:var(--cream);color:var(--text)}
+a{text-decoration:none;color:inherit}
+.nav{
+  position:sticky;top:0;z-index:20;background:rgba(86,0,0,.97);
+  color:white;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 6%;box-shadow:0 2px 12px #0002
+}
+.logo{font-size:30px;font-weight:bold;letter-spacing:1px}
+.logo small{display:block;font-size:11px;letter-spacing:4px;color:#ead9b6;text-align:center}
+.navlinks{display:flex;gap:22px;font-family:Arial,sans-serif;font-size:14px}
+.navlinks a:hover{color:#ead9b6}
+.hero{
+  min-height:74vh;display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:80px 20px;position:relative;overflow:hidden;
+  background:linear-gradient(#0008,#0008),radial-gradient(circle at center,#9b2c1d,#430000);
+  color:#fff;
+}
+.hero:before,.hero:after{content:"✦";position:absolute;color:#d9b66a;font-size:100px;opacity:.18}
+.hero:before{left:5%;top:12%}.hero:after{right:5%;bottom:8%}
+.hero-inner{max-width:800px}
+.kicker{letter-spacing:5px;text-transform:uppercase;color:#e5c77f;font:14px Arial,sans-serif}
+h1{font-size:clamp(52px,9vw,100px);margin:12px 0 4px;font-weight:normal;font-style:italic}
+.hero p{font-size:20px;line-height:1.6;margin:10px auto 28px;max-width:650px}
+.btn{
+  display:inline-block;padding:13px 22px;border-radius:30px;margin:5px;
+  background:var(--gold);color:#351b12;font:bold 14px Arial,sans-serif;cursor:pointer;border:0
+}
+.btn.alt{background:transparent;border:1px solid #e5c77f;color:#fff}
+section{padding:70px 7%}
+.section-title{text-align:center;margin-bottom:40px}
+.section-title span{color:var(--wine);font:12px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase}
+.section-title h2{font-size:38px;font-weight:normal;margin:8px 0}
+.section-title p{color:var(--muted);font-family:Arial,sans-serif}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.about-card{background:white;padding:35px;border-radius:18px;box-shadow:0 8px 30px #4a1c1020}
+.about-card p{font:16px/1.75 Arial,sans-serif;color:#5d4c47}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+.info{background:#fff;border-top:4px solid var(--gold);padding:22px;border-radius:12px;text-align:center}
+.info strong{display:block;color:var(--wine);font:16px Arial,sans-serif;margin-bottom:7px}
+.info span{font:14px Arial,sans-serif;color:var(--muted)}
+.menu-wrap{max-width:1150px;margin:auto}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.menu-card{background:#fff;padding:25px 28px;border-radius:15px;box-shadow:0 6px 25px #4a1c1018}
+.menu-card h3{color:var(--wine);font-size:24px;margin:0 0 15px;border-bottom:1px solid #eadccf;padding-bottom:10px}
+.item{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px dashed #ddcfc7;font:15px Arial,sans-serif}
+.item:last-child{border-bottom:0}
+.item span:last-child{font-weight:bold;white-space:nowrap;color:var(--wine)}
+.full{grid-column:1/-1}
+.ratings{background:#fff3e4}
+.rating-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1050px;margin:auto}
+.rating-card{background:#fff;padding:24px;border-radius:15px;box-shadow:0 5px 20px #4a1c1015}
+.stars{color:#c99a4a;font-size:22px;letter-spacing:2px}
+.rating-card p{font:14px/1.6 Arial,sans-serif;color:#62514b}
+.rating-card b{font-family:Arial,sans-serif}
+.reservation{background:var(--wine);color:#fff}
+.reservation .section-title span{color:#e5c77f}
+.reservation .section-title h2{color:#fff}
+.form{
+  max-width:850px;margin:auto;background:#fff;color:var(--text);padding:30px;border-radius:18px;
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;box-shadow:0 10px 35px #0003
+}
+.form label{font:12px Arial,sans-serif;font-weight:bold;color:#6d5a54}
+.form input,.form select,.form textarea{
+  width:100%;margin-top:6px;padding:12px;border:1px solid #dbcfc8;border-radius:9px;
+  font:14px Arial,sans-serif;background:#fffaf7
+}
+.form .full-field{grid-column:1/-1}
+.form button{grid-column:1/-1}
+.notice{grid-column:1/-1;font:12px Arial,sans-serif;color:#76655f;background:#fff8ef;padding:12px;border-radius:8px}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+.contact-box{background:#fff;padding:28px;border-radius:15px;box-shadow:0 6px 25px #4a1c1018}
+.contact-box h3{color:var(--wine);font-size:24px;margin-top:0}
+.contact-box p{font:15px/1.8 Arial,sans-serif}
+.contact-box a{color:var(--wine);font-weight:bold}
+footer{background:#350000;color:#fff;text-align:center;padding:28px;font-family:Arial,sans-serif}
+footer .foot-logo{font:italic 28px Georgia,serif}
+#message{display:none;text-align:center;margin-top:12px;padding:12px;background:#e7f6e7;color:#215b21;border-radius:8px;font:14px Arial,sans-serif}
+@media(max-width:800px){
+ .nav{padding:12px 4%}.navlinks{display:none}
+ .about,.contact,.menu-grid{grid-template-columns:1fr}
+ .info-grid,.rating-grid{grid-template-columns:1fr}
+ .form{grid-template-columns:1fr}
+ .full-field,.form button,.notice{grid-column:auto}
+ section{padding:55px 5%}
+ .full{grid-column:auto}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="logo" href="#inicio">Nonna Mia<small>RISTORANTE ITALIANO</small></a>
+  <div class="navlinks">
+    <a href="#sobre">Sobre</a>
+    <a href="#cardapio">Cardápio</a>
+    <a href="#avaliacoes">Avaliações</a>
+    <a href="#reserva">Reservas</a>
+    <a href="#contato">Contato</a>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="hero-inner">
+    <div class="kicker">Cucina italiana • tradição • sabor</div>
+    <h1>Nonna Mia</h1>
+    <p>Uma experiência italiana com massas artesanais, pizzas, sobremesas e aquele carinho de comida feita como na casa da nonna.</p>
+    <a class="btn" href="#cardapio">Ver cardápio</a>
+    <a class="btn alt" href="#reserva">Fazer reserva</a>
+  </div>
+</header>
+
+<section id="sobre">
+  <div class="section-title">
+    <span>Benvenuti</span>
+    <h2>Um pedacinho da Itália</h2>
+    <p>Conheça o Nonna Mia e viva uma experiência gastronômica especial.</p>
+  </div>
+  <div class="about">
+    <div class="about-card">
+      <h3>🍝 Sabor de família</h3>
+      <p>O Nonna Mia é um restaurante italiano pensado para reunir pessoas em torno de uma boa mesa. Nosso cardápio combina clássicos italianos, massas, pizzas artesanais, entradas, sobremesas e bebidas.</p>
+      <p>Nosso atendimento busca deixar cada visita confortável, acolhedora e saborosa.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info"><strong>📍 Localização</strong><span>Avenida Atlântica, nº 1920</span></div>
+      <div class="info"><strong>📞 Telefone</strong><span>(21) 98395-8550</span></div>
+      <div class="info"><strong>🍷 Estilo</strong><span>Restaurante italiano</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="cardapio">
+  <div class="section-title">
+    <span>La nostra cucina</span>
+    <h2>Cardápio</h2>
+    <p>Confira algumas das nossas especialidades.</p>
+  </div>
+  <div class="menu-wrap">
+    <div class="menu-grid">
+      <div class="menu-card">
+        <h3>Entradas</h3>
+        <div class="item"><span>Bruschetta Tradizionale</span><span>R$ 24,90</span></div>
+        <div class="item"><span>Bruschetta de Tomate e Burrata</span><span>R$ 32,90</span></div>
+        <div class="item"><span>Carpaccio de Filé-Mignon</span><span>R$ 39,90</span></div>
+        <div class="item"><span>Burrata com Tomates e Manjericão</span><span>R$ 42,90</span></div>
+        <div class="item"><span>Caprese Italiana</span><span>R$ 34,90</span></div>
+        <div class="item"><span>Polenta Frita com Parmesão</span><span>R$ 26,90</span></div>
+        <div class="item"><span>Tábua de Queijos e Frios Italianos</span><span>R$ 49,90</span></div>
+      </div>
+
+      <div class="menu-card">
+        <h3>Saladas</h3>
+        <div class="item"><span>Salada Caprese</span><span>R$ 29,90</span></div>
+        <div class="item"><span>Salada Caesar</span><span>R$ 32,90</span></div>
+        <div class="item"><span>Salada Mediterrânea</span><span>R$ 31,90</span></div>
+        <div class="item"><span>Rúcula, Parma e Parmesão</span><span>R$ 34,90</span></div>
+      </div>
+
+      <div class="menu-card">
+        <h3>Massas</h3>
+        <div class="item"><span>Spaghetti à Bolonhesa</span><span>R$ 39,90</span></div>
+        <div class="item"><span>Spaghetti Carbonara</span><span>R$ 42,90</span></div>
+        <div class="item"><span>Penne ao Pomodoro</span><span>R$ 34,90</span></div>
+        <div class="item"><span>Penne Quatro Queijos</span><span>R$ 42,90</span></div>
+        <div class="item"><span>Fettuccine Alfredo</span><span>R$ 44,90</span></div>
+        <div class="item"><span>Fettuccine com Camarão</span><span>R$ 54,90</span></div>
+        <div class="item"><span>Linguine ao Pesto</span><span>R$ 39,90</span></div>
+        <div class="item"><span>Pappardelle com Ragu de Carne</span><span>R$ 49,90</span></div>
+        <div class="item"><span>Nhoque ao Sugo</span><span>R$ 38,90</span></div>
+        <div class="item"><span>Nhoque Quatro Queijos</span><span>R$ 43,90</span></div>
+        <div class="item"><span>Ravioli de Ricota e Espinafre</span><span>R$ 44,90</span></div>
+        <div class="item"><span>Ravioli de Queijo ao Molho Pomodoro</span><span>R$ 42,90</span></div>
+        <div class="item"><span>Lasagna à Bolonhesa</span><span>R$ 46,90</span></div>
+        <div class="item"><span>Lasagna de Quatro Queijos</span><span>R$ 44,90</span></div>
+      </div>
+
+      <div class="menu-card">
+        <h3>Pizzas Artesanais</h3>
+        <div class="item"><span>Margherita</span><span>R$ 42,90</span></div>
+        <div class="item"><span>Calabresa</span><span>R$ 44,90</span></div>
+        <div class="item"><span>Quatro Queijos</span><span>R$ 49,90</span></div>
+        <div class="item"><span>Pepperoni</span><span>R$ 49,90</span></div>
+        <div class="item"><span>Frango com Catupiry</span><span>R$ 47,90</span></div>
+        <div class="item"><span>Parma e Rúcula</span><span>R$ 54,90</span></div>
+        <div class="item"><span>Funghi com Queijo</span><span>R$ 49,90</span></div>
+        <div class="item"><span>Portuguesa Italiana</span><span>R$ 47,90</span></div>
+      </div>
+
+      <div class="menu-card">
+        <h3>Sobremesas — Dolci</h3>
+        <div class="item"><span>Tiramisù</span><span>R$ 24,90</span></div>
+        <div class="item"><span>Panna Cotta</span><span>R$ 22,90</span></div>
+        <div class="item"><span>Cannoli Siciliano</span><span>R$ 21,90</span></div>
+        <div class="item"><span>Torta de Chocolate Italiano</span><span>R$ 23,90</span></div>
+        <div class="item"><span>Gelato Italiano</span><span>R$ 18,90</span></div>
+        <div class="item"><span>Panna Cotta com Frutas Vermelhas</span><span>R$ 24,90</span></div>
+      </div>
+
+      <div class="menu-card">
+        <h3>Bebidas</h3>
+        <div class="item"><span>Água</span><span>R$ 6,00</span></div>
+        <div class="item"><span>Água com gás</span><span>R$ 7,00</span></div>
+        <div class="item"><span>Refrigerante</span><span>R$ 8,00</span></div>
+        <div class="item"><span>Suco natural</span><span>R$ 12,00</span></div>
+        <div class="item"><span>Limonada Siciliana</span><span>R$ 14,00</span></div>
+        <div class="item"><span>Café Espresso</span><span>R$ 7,00</span></div>
+        <div class="item"><span>Cappuccino Italiano</span><span>R$ 12,00</span></div>
+      </div>
+
+      <div class="menu-card full">
+        <h3>Carta de Vinhos</h3>
+        <div class="item"><span>Vinho tinto</span><span>a partir de R$ 79,90</span></div>
+        <div class="item"><span>Vinho branco</span><span>a partir de R$ 79,90</span></div>
+        <div class="item"><span>Vinho rosé</span><span>a partir de R$ 74,90</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ratings" id="avaliacoes">
+  <div class="section-title">
+    <span>La nostra esperienza</span>
+    <h2>Avaliações</h2>
+    <p>Espaço para os clientes avaliarem o local, a comida e o atendimento.</p>
+  </div>
+  <div class="rating-grid">
+    <div class="rating-card">
+      <div class="stars">★★★★★</div>
+      <p>“As massas estavam deliciosas e o ambiente é muito agradável. Dá vontade de voltar.”</p>
+      <b>— Cliente Nonna Mia</b>
+    </div>
+    <div class="rating-card">
+      <div class="stars">★★★★★</div>
+      <p>“A comida chegou muito bem apresentada e o atendimento dos garçons foi excelente.”</p>
+      <b>— Cliente Nonna Mia</b>
+    </div>
+    <div class="rating-card">
+      <div class="stars">★★★★☆</div>
+      <p>“Lugar bonito, comida saborosa e uma experiência italiana bem especial.”</p>
+      <b>— Cliente Nonna Mia</b>
+    </div>
+  </div>
+  <div style="max-width:700px;margin:30px auto 0;background:#fff;padding:25px;border-radius:15px">
+    <h3 style="color:var(--wine);margin-top:0">Avalie sua experiência</h3>
+    <form onsubmit="avaliar(event)">
+      <label style="font:13px Arial,sans-serif">Seu nome</label>
+      <input id="nomeAvaliacao" required style="width:100%;margin:6px 0 12px;padding:11px;border:1px solid #ddd;border-radius:8px">
+      <label style="font:13px Arial,sans-serif">Nota</label>
+      <select id="notaAvaliacao" style="width:100%;margin:6px 0 12px;padding:11px;border:1px solid #ddd;border-radius:8px">
+        <option>★★★★★</option><option>★★★★☆</option><option>★★★☆☆</option><option>★★☆☆☆</option><option>★☆☆☆☆</option>
+      </select>
+      <label style="font:13px Arial,sans-serif">Comentário</label>
+      <textarea id="comentarioAvaliacao" rows="3" required style="width:100%;margin:6px 0 12px;padding:11px;border:1px solid #ddd;border-radius:8px"></textarea>
+      <button class="btn" type="submit">Enviar avaliação</button>
+      <div id="avaliacaoMsg" style="font:13px Arial,sans-serif;color:#215b21;margin-top:8px"></div>
+    </form>
+  </div>
+</section>
+
+<section class="reservation" id="reserva">
+  <div class="section-title">
+    <span>Prenotazione</span>
+    <h2>Faça sua reserva</h2>
+    <p>Preencha os dados e envie sua solicitação de reserva.</p>
+  </div>
+  <form class="form" onsubmit="reservar(event)">
+    <div>
+      <label>Nome</label>
+      <input id="resNome" required placeholder="Seu nome">
+    </div>
+    <div>
+      <label>Telefone</label>
+      <input id="resTel" required placeholder="(21) 99999-9999">
+    </div>
+    <div>
+      <label>Data</label>
+      <input id="resData" type="date" required>
+    </div>
+    <div>
+      <label>Horário</label>
+      <input id="resHora" type="time" required>
+    </div>
+    <div>
+      <label>Número de pessoas</label>
+      <select id="resPessoas">
+        <option>1 pessoa</option><option selected>2 pessoas</option><option>3 pessoas</option><option>4 pessoas</option>
+        <option>5 pessoas</option><option>6 pessoas</option><option>7 pessoas</option><option>8 pessoas</option>
+        <option>Mais de 8 pessoas</option>
+      </select>
+    </div>
+    <div>
+      <label>Ocasião</label>
+      <select id="resOcasião">
+        <option>Almoço</option><option>Jantar</option><option>Aniversário</option><option>Encontro</option><option>Outra</option>
+      </select>
+    </div>
+    <div class="full-field">
+      <label>Observações</label>
+      <textarea id="resObs" rows="3" placeholder="Ex.: mesa próxima à janela, aniversário..."></textarea>
+    </div>
+    <div class="notice">A reserva é uma solicitação. O restaurante poderá confirmar o horário pelo telefone informado.</div>
+    <button class="btn" type="submit">Solicitar reserva</button>
+  </form>
+</section>
+
+<section id="contato">
+  <div class="section-title">
+    <span>Contatti</span>
+    <h2>Venha nos visitar</h2>
+  </div>
+  <div class="contact">
+    <div class="contact-box">
+      <h3>Nonna Mia 🇮🇹</h3>
+      <p><strong>Endereço:</strong><br>Avenida Atlântica, nº 1920</p>
+      <p><strong>Telefone:</strong><br><a href="tel:+5521983958550">(21) 98395-8550</a></p>
+      <p><a href="https://wa.me/5521983958550" target="_blank">💬 Falar pelo WhatsApp</a></p>
+    </div>
+    <div class="contact-box">
+      <h3>Horário e atendimento</h3>
+      <p>Para o trabalho da turma, este espaço pode receber os horários de funcionamento e outras informações do restaurante.</p>
+      <p><strong>Reservas:</strong> feitas pelo formulário do site e confirmadas pelo restaurante.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">Nonna Mia</div>
+  <div>Restaurante Italiano • Sabor que reúne pessoas</div>
+  <div style="margin-top:10px;font-size:12px;opacity:.75">Projeto acadêmico — site demonstrativo</div>
+</footer>
+
+<script>
+function reservar(e){
+  e.preventDefault();
+  const nome=document.getElementById('resNome').value;
+  const tel=document.getElementById('resTel').value;
+  const data=document.getElementById('resData').value;
+  const hora=document.getElementById('resHora').value;
+  const pessoas=document.getElementById('resPessoas').value;
+  const ocasiao=document.getElementById('resOcasião').value;
+  const obs=document.getElementById('resObs').value;
+  const texto=`Olá, Nonna Mia! Gostaria de solicitar uma reserva.%0A%0ANome: ${encodeURIComponent(nome)}%0ATelefone: ${encodeURIComponent(tel)}%0AData: ${encodeURIComponent(data)}%0AHorário: ${encodeURIComponent(hora)}%0APessoas: ${encodeURIComponent(pessoas)}%0AOcasião: ${encodeURIComponent(ocasiao)}%0AObservações: ${encodeURIComponent(obs||'Nenhuma')}`;
+  window.open('https://wa.me/5521983958550?text='+texto,'_blank');
+}
+function avaliar(e){
+  e.preventDefault();
+  document.getElementById('avaliacaoMsg').textContent='Avaliação enviada! No projeto real, ela seria salva em um banco de dados.';
+  e.target.reset();
+}
+</script>
+</body>
+</html>
